@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="foods.json"> </script>
+	<script>
+        var foodList=[];
+		if (typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		if(localStorage.getItem("foodmenu")!=undefined){
+			var food_string=localStorage.getItem("foodmenu");
+			foodmenu=JSON.parse(food_string);
+		}
+        }
+		function addfood(){
+			if($("#name").val()!=""){
+                var n=$("#name").val();
+                var price= $("#price").val();
+                
+                var t={name:n,price:price};
+                console.log('before '+JSON.stringify(t));
+                foodmenu.push(t);
+                localStorage.setItem("foodmenu",JSON.stringify(foodmenu));
+                showfoodmenu();
+                clearData();
+            }else{
+                alert('Please fill complete information');
+            }
+		}
+        function clearData(){
+            $("#name").val("");
+            $("#price").val("");
+            $("#qty").val("");
+        }
+        function editfood(o){
+            var currentfood=foodmenu[o];
+            alert('selected food is '+currentfood.name);
+        }
+        function deletefood(o){
+            var currentfood=foodmenu[o];
+            alert('selected food is '+currentfood.name);
+        }
+		function showfoodmenu(){
+			if(foodmenu.length>0){
+				$("#foodmenu tbody").empty();
+				var n=0;
+				foodmenu.forEach(function(fm, i){
+                    n++;
+					$("#foodmenu tbody").append(
+                        '<tr>'
+                            +'<td>'+n+'</td>'
+                            +'<td>'+fm.name+'</td>'
+                            +'<td>'+fm.price+'</td>'
+                            +'<td>'+fm.quantity+'</td>'
+                            +'<td><a onclick="editfood('+i+')" class="btn btn-success">Edit</a>&nbsp;&nbsp;<a onclick="deletefood('+i+')" class="btn btn-danger">Delete</a></td>'
+                        +'</tr>'
+                    );
+				});
+			}
+		}
+		
+	
+	$(document).ready(function(){
+        showfoodmenu();
+	});
+	</script>
+	<style>
+	*{
+	box-sizing:border-box;
+	}
+	img{
+	width:150px;
+	height:150px;
+	}
+	.price{
+	color:rgb(219, 16, 16);
+	margin-left:20px;
+	font-size:18px;
+	}
+	.flex-container {
+	display: flex;
+	
+	align-items: center;
+	
+	}
+	.p-2{
+	margin:5px !important;
+	}
+	</style>
+  </head>
+<body> 
+	<nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="food.html">Manage Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="menu.html">Manage Food</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="drink.html">Manage Order</a>
+          </li>
+        </ul>
+      </nav>
+      <br>
+<div class="container">
+	<h4>FoodMenu</h4>
+	
+  <div class="col-12">
+      <div class="form-group">
+            <label for="name">Food Name</label>
+            <input type="text" class="form-control col-12" id="name" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control col-12" id="price" />
+		</div>
+		<div class="form-group">
+            <label for="category">Quantity</label>
+            <input type="text" class="form-control " id="qty" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="addfood();"> Add</button>
+        </div>
+
+</div>
+<div class="col-12">
+	<table class="table" id="teamList">
+		<thead>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+			</tr>
+
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+ 
+ 
+</div>
+
+</body>
+</html>

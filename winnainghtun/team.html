@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="foods.json"> </script>
+	<script>
+        var teamList=[];
+		if (typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		if(localStorage.getItem("teamList")!=undefined){
+			var food_string=localStorage.getItem("teamList");
+			teamList=JSON.parse(food_string);
+		}
+        }
+		function addTeam(){
+			if($("#name").val()!=""){
+                var n=$("#name").val();
+                var fdate= $("#date").val();
+                var desc= $("#description").val();
+                var t={name:n,foundeddate:fdate,description:desc};
+                console.log('before '+JSON.stringify(t));
+                teamList.push(t);
+                localStorage.setItem("teamList",JSON.stringify(teamList));
+                showTeamList();
+                clearData();
+            }else{
+                alert('Please fill complete information');
+            }
+		}
+        function clearData(){
+            $("#name").val("");
+            $("#date").val("");
+            $("#description").val("");
+        }
+        function editTeam(o){
+            var currentTeam=teamList[o];
+            alert('selected team is '+currentTeam.name);
+        }
+        function deleteTeam(o){
+            var currentTeam=teamList[o];
+            alert('selected team is '+currentTeam.name);
+        }
+		function showTeamList(){
+			if(teamList.length>0){
+				$("#teamList tbody").empty();
+				var n=0;
+				teamList.forEach(function(tm, i){
+                    n++;
+					$("#teamList tbody").append(
+                        '<tr>'
+                            +'<td>'+n+'</td>'
+                            +'<td>'+tm.name+'</td>'
+                            +'<td>'+tm.foundeddate+'</td>'
+                            +'<td>'+tm.description+'</td>'
+                            +'<td><a onclick="editTeam('+i+')" class="btn btn-success">Edit</a>&nbsp;&nbsp;<a onclick="deleteTeam('+i+')" class="btn btn-danger">Delete</a></td>'
+                        +'</tr>'
+                    );
+				});
+			}
+		}
+		
+	
+	$(document).ready(function(){
+        showTeamList();
+	});
+	</script>
+	<style>
+	*{
+	box-sizing:border-box;
+	}
+	img{
+	width:150px;
+	height:150px;
+	}
+	.price{
+	color:gold;
+	margin-left:20px;
+	font-size:18px;
+	}
+	.flex-container {
+	display: flex;
+	
+	align-items: center;
+	
+	}
+	.p-2{
+	margin:5px !important;
+	}
+	</style>
+  </head>
+<body> 
+	<nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="order.html">Manage Order</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="team.html">Manage Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="player.html">Manage Player</a>
+          </li>
+        </ul>
+      </nav>
+      <br>
+<div class="container">
+	<h4>Team List</h4>
+	
+  <div class="col-12">
+      <div class="form-group">
+            <label for="name">Team Name</label>
+            <input type="text" class="form-control col-12" id="name" />
+        </div>
+        <div class="form-group">
+            <label for="price">Founded Date</label>
+            <input type="date" class="form-control col-12" id="date" />
+		</div>
+		<div class="form-group">
+            <label for="category">Description</label>
+            <input type="text" class="form-control " id="description" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="addTeam();"> Add</button>
+        </div>
+
+</div>
+<div class="col-12">
+	<table class="table" id="teamList">
+		<thead>
+			<tr>
+				<th>
+					No
+				</th>
+				<th>
+					Name
+				</th>
+				<th>Founded Year</th>
+				<th>Description</th>
+				<th>Action</th>
+			</tr>
+
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+ 
+ 
+</div>
+
+</body>
+</html>

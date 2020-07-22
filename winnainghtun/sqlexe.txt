@@ -1,0 +1,87 @@
+ select * from menu;
++----+-------+-------------------+
+| id | name  | description       |
++----+-------+-------------------+
+|  1 | food  | This is food      |
+|  2 | drink | This is for drink |
+|  3 | juice | This is for drink |
++----+-------+-------------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from food;
++----+---------------+-------+---------+
+| id | name          | price | menu_id |
++----+---------------+-------+---------+
+|  1 | chicken_curry |  5000 |       1 |
+|  2 | pork_curry    |  6000 |       1 |
+|  3 | seafood       | 10000 |       1 |
+|  4 | beer          |  2000 |       2 |
+|  5 | wine          | 15000 |       2 |
+|  6 | alcohol       |  5000 |       2 |
+|  7 | apple         |  2000 |       3 |
+|  8 | orange        |  2000 |       3 |
+|  9 | grape         |  2000 |       3 |
++----+---------------+-------+---------+
+9 rows in set (0.02 sec)
+
+mysql> select * from orders;
++----+------------+------+---------+-------+------------+
+| id | sale_date  | qty  | food_id | price | totalprice |
++----+------------+------+---------+-------+------------+
+|  1 | 2020-07-10 |    3 |       1 |  5000 |      15000 |
+|  2 | 2020-07-10 |    2 |       2 |  6000 |      12000 |
+|  3 | 2020-07-10 |    4 |       3 | 10000 |      40000 |
+|  4 | 2020-07-13 |    6 |       4 |  2000 |      12000 |
+|  5 | 2020-07-13 |    1 |       5 | 15000 |      15000 |
+|  6 | 2020-07-15 |    3 |       6 |  5000 |      15000 |
+|  7 | 2020-07-11 |    3 |       7 |  2000 |       6000 |
+|  8 | 2020-07-11 |    3 |       8 |  2000 |       6000 |
+|  9 | 2020-07-11 |    3 |       9 |  2000 |       6000 |
++----+------------+------+---------+-------+------------+
+9 rows in set (0.00 sec)
+
+mysql> select name,totalprice from food,orders where totalprice in(select max(totalprice) from orders) and food.id=orders.food_id;
++---------+------------+
+| name    | totalprice |
++---------+------------+
+| seafood |      40000 |
++---------+------------+
+1 row in set (0.03 sec)
+
+mysql> select name,totalprice from food,orders where totalprice in(select min(totalprice) from orders) and food.id=orders.food_id;
++--------+------------+
+| name   | totalprice |
++--------+------------+
+| apple  |       6000 |
+| orange |       6000 |
+| grape  |       6000 |
++--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>  select sale_date,sum(totalprice) from orders group by sale_date;
++------------+-----------------+
+| sale_date  | sum(totalprice) |
++------------+-----------------+
+| 2020-07-10 |           67000 |
+| 2020-07-13 |           27000 |
+| 2020-07-15 |           15000 |
+| 2020-07-11 |           18000 |
++------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql>  select sum(totalprice) from orders where sale_date between '2020.07.11' and '2020.07.15';
++-----------------+
+| sum(totalprice) |
++-----------------+
+|           60000 |
++-----------------+
+1 row in set (0.03 sec)
+
+mysql>
+
+
+
+
+
+
+

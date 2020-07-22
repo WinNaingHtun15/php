@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Order Menu </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/5c08699f58.js" crossorigin="anonymous"></script>
+        <script src="resturant.js"></script>
+        <style>
+            table{
+                margin-top: 40%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3" style="background-color: rgb(241, 240, 215);">
+                    <div class="rounded-sm w-30 h-30">
+                        <h1 class="mt-4 bg-red text-white">OUR MENU
+                            <img src="C:\Users\Hp\Desktop\pic\res-logo.jpg" class="rounded " alt="Restaurant Logo">
+                        </h1>
+                    </div>
+                    <div class="list-group list-group-flush">
+                    <a href="#panel-1" class="list-group-item list-group-item-action font-weight-bold bg-white text-pink"data-toggle="collaspe">Traditional Pizza</a>
+                    <a href="#panel-2" class="list-group-item list-group-item-action font-weight-bold bg-white text-pink"data-toggle="collaspe">White Pizza</a>
+                    <a href="#panel-3" class="list-group-item list-group-item-action font-weight-bold bg-white text-pink"data-toggle="collaspe">Gourment Pizza</a>
+                    <a href="#panel-4" class="list-group-item list-group-item-action font-weight-bold bg-white text-pink"data-toggle="collaspe">Sicilian Pizza</a>
+                    <a href="#panel-5" class="list-group-item list-group-item-action font-weight-bold bg-white text-pink"data-toggle="collaspe">Stuffed Pizza</a>
+                    </div>
+            </div>
+            <div class="col-sm-4" style="background-color: rgb(240, 228, 234);">
+            <div class="input-group form-sm mt-4 bg-dark pl-3 pr-3">
+                <input class="form-control mt-3 mb-3 rounded" type="text" placeholder="Search our menu..">
+                <div class="input-group-append mt-3 mb-3">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+             </div>
+        </div>
+        <div class="collaspe" id="pannel-1" data-parent="#accordion">
+            <div class="bg-white">
+                <h2 class="mt-2 text-blue">ENTREES</h2>
+            </div>
+            <div class="card mb-3" style="max-width: 500%;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="C:\Users\Hp\Desktop\pic\pizza.jpg" class="card-img mt-4" alt="Baked Ziti">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <span class="float-right font-weight-bold float-top bg-dark text-danger">$11.99</span>
+                  <h5 class="card-title">Baked Ziti</h5>
+                  <p class="card-text">Zib pasta with our bolognes sauce,ricotta cheese & barker in the oven with mozzarella.</p>
+                  <button id="b1" class="btn btn-danger text-white float-right float-bottom mb-3">&plus;&nbsp;ORDER</button>
+                 </div>
+               </div>
+            </div>
+        </div>
+        <div class="card mb-3" style="max-width: 500%;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="C:\Users\Hp\Desktop\pic\pizza.jpg" class="card-img mt-4" alt="Baked Ziti">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <span class="float-right font-weight-bold float-top bg-dark text-danger">$11.50</span>
+                  <h5 class="card-title">Chicken Broccoli Alfredo</h5>
+                  <p class="card-text">Grilled chicken sauteed with broccoli & alfredo over linguin.</p>
+                  <button id="b1" class="btn btn-danger text-white float-right float-bottom mb-3">&plus;&nbsp;ORDER</button>
+                 </div>
+               </div>
+            </div>
+        </div>
+        <div class="card mb-3" style="max-width: 500%;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="C:\Users\Hp\Desktop\pic\pizza.jpg" class="card-img mt-4" alt="Baked Ziti">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <span class="float-right font-weight-bold float-top bg-dark text-danger">$11.99</span>
+                  <h5 class="card-title">Chicken Cacciotore</h5>
+                  <p class="card-text">With white onion,green pepper,tomatos,mushrooms,white wine,garlic & oregano over spaghett.</p>
+                  <button id="b1" class="btn btn-danger text-white float-right float-bottom mb-3">&plus;&nbsp;ORDER</button>
+                 </div>
+               </div>
+            </div>
+        </div>
+        <div class="card mb-3" style="max-width: 500%;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="C:\Users\Hp\Desktop\pic\pizza.jpg" class="card-img mt-4" alt="Baked Ziti">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <span class="float-right font-weight-bold float-top bg-dark text-danger">$11.99</span>
+                  <h5 class="card-title">Angle Hair Chicken Pasta</h5>
+                  <p class="card-text">Sauteed chicken,fresh baby spinach,garlic,white wine,chicken broth,ollive oil&parmesan cheese</p>
+                  <button id="b1" class="btn btn-danger text-white float-right float-bottom mb-3">&plus;&nbsp;ORDER</button>
+                 </div>
+               </div>
+            </div>
+        </div>
+        </div>
+        <div class="collaspe" id="pannel-2" data-parent="#accordion">
+            <div class="bg-white">
+                <h2 class="mt-2 text-dark">ENTREES</h2>
+        </div>
+        
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="C:\Users\Hp\Desktop\pic\pizza.jpg" class="card-img mt-4" alt="white pizza">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <span class="float-right font-weight-bold float-top bg-dark text-danger">$11.00</span>
+                  <h5 class="card-title">White Pizza</h5>
+                  <p class="card-text">White pizza is very goods.</p>
+                  <button id="b5" class="btn btn-danger text-white float-right float-bottom mb-3">&plus;&nbsp;ORDER</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>

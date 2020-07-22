@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+      var Student={
+          name:"WinNaingHtun",
+          grade:"5 Year",
+          rollNo:"5Cs-177"
+      };
+      alert('Your name is'+Student.name);
+      function changeName(){
+          Student.name=document.getElementById('name').value;
+          alert('Your name is'+Student.name);
+      }
+        </script>
+    </head>
+    <body>
+        <label>changeName:</label><br>
+        <input type="text" id="name"/><br>
+        <button onclick="changeName()">Change Your Name</button>
+    </body>
+</html>

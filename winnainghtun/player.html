@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="foods.json"> </script>
+	<script>
+        var playerList=[];
+		var teamList=[];
+		if (typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		if(localStorage.getItem("playerList")!=null){
+			var food_string=localStorage.getItem("playerList");
+			playerList=JSON.parse(food_string);
+		}
+		if(localStorage.getItem("teamList")!=undefined){
+            teamList=JSON.parse(localStorage.getItem("teamList"));
+        }
+		
+		
+		} else {
+		// Sorry! No Web Storage support..
+		}
+		function addPlayer(){
+            if($("#name").val()!="" && $("#jno").val()!="" && $("#team").val()!=""){
+                var n=$("#name").val();
+                var jno=$("#jno").val();
+                var h=$("#height").val();
+                var w=$("#weight").val();
+                var t=$("#team").val();
+                var p={name: n, jersyno:jno,height:h,weight:w,team:t};
+                console.log('before '+JSON.stringify(p));
+                playerList.push(p);
+                localStorage.setItem('playerList',JSON.stringify(playerList));
+                showPlayer();
+            }else {
+                alert('Please fill complete information');
+            }
+        }
+		function showTeam(){
+			if(teamList.length>0){
+				$("#team").empty();
+				$("#team").append("<option> Select Team</option>");
+				teamList.forEach(function(tm, i){
+					$("#team").append("<option value='"+tm.name+"'>"+tm.name+"</option>");
+				});
+			}
+		}
+		function showPlayer(){
+			$("#players tbody").empty();
+            var n=0;
+			playerList.forEach(function(p,i){
+				n++;
+				$("#players tbody").append(
+					'<tr>'
+						+'<td>'+n+'</td>'
+						+'<td>'+p.name+'</td>'
+						+'<td>'+p.jersyno+'</td>'
+						+'<td>'+p.height+'</td>'
+                        +'<td>'+p.weight+'</td>'
+                        +'<td>'+p.team+'</td>'
+						+'<td></td>'
+					+'</tr>'
+				);
+			});
+		}
+	/*foodList.forEach(function(value,i){
+		alert(value.name);
+	});
+	*/
+	
+	
+	$(document).ready(function(){
+	//showFoodItem();
+	showTeam();
+	showPlayer();
+	});
+	</script>
+	<style>
+	*{
+	box-sizing:border-box;
+	}
+	img{
+	width:150px;
+	height:150px;
+	}
+	.price{
+	color:gold;
+	margin-left:20px;
+	font-size:18px;
+	}
+	.flex-container {
+	display: flex;
+	
+	align-items: center;
+	
+	}
+	.p-2{
+	margin:5px !important;
+	}
+	</style>
+  </head>
+<body> 
+	<nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="order.html">Manage Order</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="category.html">Manage Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="new_food.html">Manage Food</a>
+          </li>
+        </ul>
+      </nav>
+      <br>
+<div class="container">
+	<h4>Available Food Items</h4>
+    <div class="row">
+  <div class="col-6">
+      <div class="form-group">
+            <label for="name">Name </label>
+            <input type="text" class="form-control col-12" id="name" />
+        </div>
+        <div class="form-group">
+            <label for="jno">Jersy No.</label>
+            <input type="text" class="form-control col-12" id="jno" />
+		</div>
+		<div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control col-12" id="age" />
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight</label>
+            <input type="text" class="form-control col-12" id="weight" />
+        </div>
+        <div class="form-group">
+            <label for="height">Height</label>
+            <input type="text" class="form-control col-12" id="height" />
+        </div>
+        <div class="form-group">
+            <label for="team">Team</label>
+            <select class="form-control col-12" id="team"></select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="addPlayer();"> Add</button>
+        </div>
+
+</div>
+<div class="col-6">
+	<table class="table" id="players">
+		<thead>
+			<tr>
+				<th>
+					No
+				</th>
+				<th>
+					Name
+				</th>
+				<th>Jersy No</th>
+				<th>Height</th>
+                <th>Weight</th>
+                <th>Team</th>
+			</tr>
+
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+</div>
+ 
+</div>
+
+</body>
+</html>

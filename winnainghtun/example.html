@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script>
+           var studentList=[];
+           $(document).ready(function(){
+               alert('hello jquery');
+               $("#btnAdd").click(function(){
+                 var name=$("#name").val();
+                 var rollNo=$("#rollNo").val();
+                 var std={stdName:name,stdRollNo:rollNo};
+                 studentList.push(std);
+                 $("#stdBody").append(
+                     "<tr>"
+                        +"<td>"+name+"</td>"
+                        +"<td>"+rollNo+"</td>"
+                    +"</tr>"
+                 );
+                 $("#name").val("");
+                 $("#rollNo").val("");
+                 $("#stdQty").text("Total Student "+studentList.length);
+               });
+           });
+       </script>
+    </head>
+    <body>
+       <label>Name:</label>
+       <input type="text" id="name" />
+       <br>
+       <label>Roll No:</label><input type="text" id="rollNo" /><br>
+       <button id="btnAdd">Add</button>
+       <h3>Student List</h3>
+       <p id="stdQty"></p>
+       <table>
+           <thead>
+               <tr>
+                   <th>Name</th>
+                   <th>Roll No</th>
+               </tr>
+           </thead>
+           <tbody id="stdBody">
+
+           </tbody>
+       </table>
+    </body>
+</html>

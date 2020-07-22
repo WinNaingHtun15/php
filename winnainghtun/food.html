@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="foods.json"> </script>
+	<script>
+		var foodmenu= [];
+        var foodList=[];
+		if (typeof(Storage) !== "undefined") {
+		if(localStorage.getItem("foodList")!=undefined){
+			var food_string=localStorage.getItem("foodList");
+			List=JSON.parse(food_string);
+            foodmenu=JSON.parse(localStorage.getItem("foodList"));
+		}
+		
+		} else {
+		alert(" Sorry! No Web Storage support");
+		}
+		
+	
+	
+	foodList.forEach(function(value,i){
+		alert(value.name);
+	});
+    function chooseCategory(cindex){
+        var currentCategory= categoryList[cindex];
+        alert('Choose Category is '+currentCategory.name);
+        var selectedFood=foodList.filter(function(item,i){
+            return item.category==currentCategory.name;
+        });
+        alert('selected food '+selectedFood.length);
+        showFoodCategory(selectedFood);
+    }
+    function showfood(){
+        alert('food length' +foodList.length);
+			if(foodList.length>0){
+				$("#foodList").empty();
+				
+				foodList.forEach(function(fd, i){
+					$("#foodList").append('<li>'
+                        +'<a onclick="choosefood('+i+')">'+fd.name+'</a>'
+                        +'</li>');
+				});
+			}
+		}
+	var order_food=[];
+	var cur_food;
+	function showFoodItem(){
+	$("#foodContainer").empty();
+	foodList.forEach(function(value,key){
+		$("#foodContainer").append(
+		' <div class="p-2 border" onclick="chooseItem('+key+')">'
+			+'<img src="C:\Users\Hp\Desktop\pic\pizza.jpg"/>'
+			+'<h5 class="name">'+value.name+'</h5>'
+			+'<h4>Price:<span class="price">'+value.price+'</span> Ks</h4>'
+			+'</div>');
+	});
+	}
+    </script>
+    <style>
+        *{
+        box-sizing:border-box;
+        }
+        img{
+        width:150px;
+        height:150px;
+        }
+        .price{
+        color:rgb(228, 15, 15);
+        margin-left:20px;
+        font-size:18px;
+        }
+        .flex-container {
+      display: flex;
+      
+      align-items: center;
+      
+    }
+        .p-2{
+        margin:5px !important;
+        }
+        </style>
+      </head>
+    <body> 
+        <nav class="navbar navbar-expand-sm bg-light">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="food.html">Manage Category</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="menu.html">Manage Food</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="drink.html">Manage Order</a>
+              </li>
+            </ul>
+          </nav>
+    <div class="container-fluid">
+        
+      <div class="row">
+          <div class="col-sm-2">
+            <ul id="foodList">
+              
+            </ul>
+          </div>
+        <div class="col-sm-5">
+        <div id="foodList" class="flex-container d-flex flex-wrap bg-light">
+        
+        
+        
+        
+       <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pizza.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+            <div class="p-2 border">
+            <img src="C:\Users\Hp\Desktop\pic\co.jpg"/>
+            <h4>Price:<span class="price">5000</span> Ks</h4>
+            </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\coe.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pi.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pi.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pi.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pi.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+        <div class="p-2 border">
+        <img src="C:\Users\Hp\Desktop\pic\pizza.jpg"/>
+        <h4>Price:<span class="price">5000</span> Ks</h4>
+        </div>
+      </div>
+     
+        </div>
+        <div class="col-sm-5">
+        <table class="table" id="orderTable">
+        <thead class="thead-dark">
+          <tr>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+        </tbody>
+      </table>
+      <div class="float-sm-right">
+        
+        Total Amount: <span id="total">2000</span> &nbsp; Ks
+        
+      </div>
+        </div>
+      </div>
+      
+      <br>
+     
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Modal Heading</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="row">
+                  <input type="text" class="form-control" placeholder="Name">
+                  <input type="number" class="form-control" placeholder="Price" >
+    
+                  <button class="btn btn-primary btn-sm" onclick="addFoodItem();">Add</button>
+            </div>
+    
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </body>
+    </html>

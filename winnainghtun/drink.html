@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="foods.json"> </script>
+	<script>
+        var foodList=[];
+		var foodmenu=[];
+		if (typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		if(localStorage.getItem("foodList")!=null){
+			var food_string=localStorage.getItem("foodList");
+			foodList=JSON.parse(food_string);
+		}
+		if(localStorage.getItem("foodmenu")!=undefined){
+            foodmenu=JSON.parse(localStorage.getItem("foodmenu"));
+        }
+		
+		
+		} else {
+		alert("Sorry! No Web Storage support..");
+		}
+		function addfood(){
+            if($("#name").val()!="" && $("#price").val()!="" && $("#qty").val()!=""){
+                var n=$("#name").val();
+                var price=$("#price").val();
+                var quantity=$("#qty").val();
+                var p={name: n, price:price,quantity:qty};
+                console.log('before '+JSON.stringify(p));
+                foodList.push(p);
+                localStorage.setItem('foodList',JSON.stringify(foodList));
+                showfood();
+            }else {
+                alert('Please fill complete information');
+            }
+        }
+		function showmenu(){
+			if(foodmenu.length>0){
+				$("#drink").empty();
+				$("#drink").append("<option> Select food</option>");
+				foodmenu.forEach(function(fm, i){
+					$("#drink").append("<option value='"+fm.name+"'>"+fm.name+"</option>");
+				});
+			}
+		}
+		function showfood(){
+			$("#foods tbody").empty();
+            var n=0;
+			foodList.forEach(function(p,i){
+				n++;
+				$("#foods tbody").append(
+					'<tr>'
+						+'<td>'+n+'</td>'
+						+'<td>'+p.name+'</td>'
+						+'<td>'+p.price+'</td>'
+						+'<td>'+p.qty+'</td>'
+						+'<td></td>'
+					+'</tr>'
+				);
+			});
+		}
+	foodList.forEach(function(value,i){
+		alert(value.name);
+	});
+	
+	
+	$(document).ready(function(){
+	showFoodItem();
+	});
+	</script>
+	<style>
+	*{
+	box-sizing:border-box;
+	}
+	img{
+	width:150px;
+	height:150px;
+	}
+	.price{
+	color:gold;
+	margin-left:20px;
+	font-size:18px;
+	}
+	.flex-container {
+	display: flex;
+	
+	align-items: center;
+	
+	}
+	.p-2{
+	margin:5px !important;
+	}
+	</style>
+  </head>
+<body> 
+	<nav class="navbar navbar-expand-sm bg-pink">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="food.html">Manage Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="menu.html">Manage Food</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="drink.html">Manage Order</a>
+          </li>
+        </ul>
+      </nav>
+      <br>
+<div class="container">
+	<h4>Available Food Items</h4>
+    <div class="row">
+  <div class="col-6">
+      <div class="form-group">
+            <label for="name">Name </label>
+            <input type="text" class="form-control col-12" id="name" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control col-12" id="jno" />
+		</div>
+		<div class="form-group">
+            <label for="qty">Quantity</label>
+            <input type="text" class="form-control col-12" id="age" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="addfood();"> Add</button>
+        </div>
+
+</div>
+<div class="col-6">
+	<table class="table" id="foods">
+		<thead>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+			</tr>
+
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+</div>
+ 
+</div>
+
+</body>
+</html>

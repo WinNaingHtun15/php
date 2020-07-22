@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script>
+           $(document).ready(function(){
+               var stdList=[];
+               $("#btnAdd").click(function(){
+                var name=$("#name").val();
+               var rollNo=$("#rollNo").val();
+               var std={name:name,rollNo:rollNo};
+               stdList.push(std);
+               var json_string= JSON.stringify(stdList);
+               localStorage.setItem("student_list",json_string);
+               //var jobj=JSON.parse(test_json);
+               alert(json_string);
+               $("#result").text(json_string);
+               });
+              $("#btnShow").click(function(){
+                  var std_json=localStorage.getItem("student_list");
+                  stdList=JSON.parse(std_json);
+                  alert(stdList.length);
+              });
+           });
+       </script>
+    </head>
+    <body>
+        <label>Name:</label>
+        <input type="text" id="name" />
+        <br>
+        <label>Roll No:</label><input type="text" id="rollNo" /><br>
+        <button id="btnAdd">Add</button>
+        <button id="btnShow">Show</button>
+       <p id="result"></p>
+    </body>
+</html>
